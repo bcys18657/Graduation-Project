@@ -72,8 +72,10 @@ i = 1;
 % LQR control parameters
 m = 2;
 % mass of the vehicle
-xite1 = 0.5;
-xite2 = 6;
+% xite1 = 0.5;
+% xite2 = 6;
+xite1 = 0.;
+xite2 = 0;
 k1 = 1;
 k2 = 12;
 epc = 1;

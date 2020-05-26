@@ -13,6 +13,12 @@ obs_r = 0.3;
 reactR = 1.2;
 buffer_r = 1.5;
 
+% communication matrix
+S1 = [1 0 0];
+S2 = [1 1 0];
+S3 = [1 0 1];
+S = [S1; S2; S3];
+
 p1 = plot(target(1), target(2),  'bx');
 hold on;
 p2 = plot(obs(1, 1), obs(1, 2),  'ro');
@@ -102,40 +108,28 @@ while dis_to_tar > 0.1
 
     % control input of agent 1
     % sliding mode control
-    temp1 = -k1 * s1 - xite1 * tanh(s1) - x1_2;
-    if dis_to_obc < reactR
-        direction = rotate_force(x1_1, x1_2, obs(inx1, :));
-        v1 = temp1;
-        g = epc * norm(v1);
-        v2 = -g * direction * ((1 / (dis_to_obc - obs_r)) - (1 / (reactR - obs_r)));
-        u1(i, :) = v1 + v2;
-    else
-        u1(i, :) = temp1;
-    end
+    sum1 = get_Si(1, S);
+    temp1 = zeros(1, 2);
+    temp1 = temp1 + S(1, 2) * (e2(i, :) - e1(i, :));
+    temp1 = temp1 + S(1, 3) * (e3(i, :) - e1(i, :));
+    u1(i, :) = temp1 ./ sum1;
+        
+        
+
 
     % control input of agent2 and agent3
     % sliding mode control variable
-    temp2 = -k2 * s2 - xite2 * tanh(s2) + x1_2 - x2_2 + u1(i, :);
-    if dis_to_obc2 < reactR
-        direction = rotate_force(x2_1, x2_2, obs(inx2, :));
-        v1 = temp2;
-        g = epc * norm(v1);
-        v2 = -g * direction * ((1 / (dis_to_obc2 - obs_r)) - (1 / (reactR - obs_r)));
-        u2(i, :) = v1 + v2;
-    else
-        u2(i, :) = temp2;
-    end
+    sum2 = get_Si(2, S);
+    temp2 = zeros(1, 2);
+    temp2 = temp2 + S(2, 1) * (e1(i, :) - e2(i, :));
+    temp2 = temp2 + S(2, 3) * (e3(i, :) - e2(i, :));
+    u2(i, :) = temp2 / sum2;
 
-    temp3 = -k2 * s3 - xite2 * tanh(s3) + x1_2 - x3_2 + u1(i, :);
-    if dis_to_obc3 < reactR
-        direction = rotate_force(x3_1, x3_2, obs(inx3, :));
-        v1 = temp3;
-        g = epc * norm(v1);
-        v2 = -g * direction * ((1 / (dis_to_obc3 - obs_r)) - (1 / (reactR - obs_r)));
-        u3(i, :) = v1 + v2;
-    else
-        u3(i, :) = temp3;
-    end
+    sum3 = get_Si(3, S);
+    temp3 = zeros(1, 2);
+    temp3 = temp3 + S(3, 1) * (e1(i, :) - e3(i, :));
+    temp3 = temp3 + S(3, 2) * (e2(i, :) - e3(i, :));
+    u3(i, :) = temp3 / sum3;
 
 
     % set input force limit
@@ -246,6 +240,13 @@ legend('Leader',  'Follower1',  'Follower2');
 
 
 %% functions
+function sum = get_Si(i, S)
+    sum = 0;
+    for j = 1 : length(S(i))
+        sum = sum + S(i, j);
+    end
+end
+
 function f = rotate_force(pos, vel, obc)
     x = pos(1);
     y = pos(2);
