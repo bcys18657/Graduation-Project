@@ -19,9 +19,21 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="F:\Documents\graduationProject\project\UAV\track2\.idea" />
+      </set>
+    </option>
+  </component>
   <component name="ProjectId" id="1VaneGtbBH3jl1AQ16XFjek95lj" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/mainTest.py" />
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/detectTest.py" />
   </component>
@@ -211,7 +223,32 @@
       <option name="presentableId" value="Default" />
       <updated>1577500166255</updated>
     </task>
+    <task id="LOCAL-00001" summary="add kalman filter in UAV_track.py">
+      <created>1591080703901</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1591080703901</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add kalman filter in UAV_track.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="add kalman filter in UAV_track.py" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

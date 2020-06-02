@@ -3,7 +3,7 @@ from __future__ import print_function
 
 import os
 import threading
-import math
+import numpy as np
 # import RPi.GPIO as GPIO
 from dronekit import *
 
